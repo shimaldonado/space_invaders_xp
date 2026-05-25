@@ -1,0 +1,482 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PlantUML original del juego</title><link rel="stylesheet" href="../assets/css/styles.css"></head><body><main class="doc-page"><a class="btn small" href="../index.html">← Volver al dashboard</a><section class="doc-hero"><span class="tag">XP Space Invaders</span><h1>PlantUML original del juego</h1><p>Se conserva como evidencia técnica; para revisión del proyecto usa el diagrama resumido.</p></section><section class="doc-content"><div class="callout">El diagrama original es muy amplio. No conviene mostrarlo completo como imagen principal porque se ve pequeño y difícil de leer.</div><pre class="gherkin">@startuml
+skinparam linetype ortho
+
+package Presentacion {
+class AdministradorGeneral {
+  - panelDeJuego: PanelDeJuego
+  - verificadorDeColisiones: VerificadorDeColisiones
+  - actualizadorEntidades: ActualizadorEntidades
+  + getJFrame(): JFrame
+  + cargarPartida(PanelDeJuegoData): void
+  + verficarExistenciaEnemigos(ArrayList&lt;NaveEnemigo&gt;): void
+  + activarPausaDeReaparicion(): void
+  + agregarModificador(Modificador): void
+  + obtenerPuntuaciones(): int
+  + limpiarProyectilesDeLaVentana(): void
+  + iniciarCompetencias(ArrayList&lt;Modificador&gt;, NaveJugador, ArrayList&lt;NaveEnemigo&gt;, ArrayList&lt;Barrera&gt;, Enjambre[]): void
+  + detenerMusica(): void
+  + reproducirExplosionEnemigo(): void
+  + reproducirExplosionJugador(): void
+}
+class Escenario
+class Menú {
+  + ALTO: int
+  + ANCHO: int
+  - botonPuntuaciones: JButton
+  - botonCargarPartida: JButton
+  - botonIniciarJuego: JButton
+  - botonSalir: JButton
+  - reproductorDeMúsica: ReproductorMúsica
+  + actionPerformed(ActionEvent): void
+  - abrirVentanaJuego(): void
+}
+
+
+class PanelDeJuego {
+  + ALTO: int
+  + ANCHO: int
+  - jFrame: JFrame
+  - pintor: Pintor
+  - temporizador: Timer
+  - controladorDeTeclas: ControladorDeTeclas
+  - nave: NaveJugador
+  - enemigos: ArrayList&lt;NaveEnemigo&gt;
+  - enjambre1: Enjambre
+  - enjambre2: Enjambre
+  - enjambre3: Enjambre
+  - posicioInicialDelEnemigoEnY: int
+  - posicioInicialDelEnemigoEnX: int
+  - numeroOleada: int
+  - barreras: ArrayList&lt;Barrera&gt;
+  - modificadores: ArrayList&lt;Modificador&gt;
+  - ventanaDePausa: VentanaDePausa
+  - administradorGeneral: AdministradorGeneral
+  - panelDeJuegoData: PanelDeJuegoData
+  - reproductorDeMúsica: ReproductorMúsica
+  - reproductorDeExplosionEnemigo: ReproductorMúsica
+  - reproductorDeExplosionJugador: ReproductorMúsica
+
+  + getJFrame(): JFrame
+  + pausarJuego(): void
+  - iniciarPanel(): void
+  + reanudarJuego(): void
+  - cargarPartida(): void
+  + pausaDeReaparicion(): void
+  + aumentarNumeroOleada(): void
+  + paintComponent(Graphics): void
+  + actionPerformed(ActionEvent): void
+  + limpiarProyectilesDeLaVentana(): void
+  + agregarModificador(Modificador): void
+  + detenerMusica(): void
+  + agregarEnemigos(): void
+  + reproducirExplosionEnemigo(): void
+  + reproducirExplosionJugador(): void
+  + getPuntajeTotal(): int
+  + obtenerVidasJugador(): int
+  + obtenerPosicionEnYNave(): int
+  + obtenerPosicionEnXNave(): int
+  + obtenerBarreras(): ArrayList&lt;Barrera&gt;
+  + obtenerModificadores(): ArrayList&lt;Modificador&gt;
+  + obtenerPosicionesProyectiles(): ArrayList&lt;int[]&gt;
+  + obtenerPosicionesEnjambreDos(): ArrayList&lt;int[]&gt;
+  + obtenerPosicionesEnjambreUno(): ArrayList&lt;int[]&gt;
+  + obtenerPosicionesEnjambreTres(): ArrayList&lt;int[]&gt;
+  + obtenerPosicionesModificadores(): ArrayList&lt;int[]&gt;
+  + obtenerPosicionesProyectilesEnemigos(): ArrayList&lt;int[]&gt;
+
+}
+class PanelDeJuegoData {
+  - posicionesEnjambre1: ArrayList&lt;int[]&gt;
+  - posicionesEnjambre2: ArrayList&lt;int[]&gt;
+  - posicionesEnjambre3: ArrayList&lt;int[]&gt;
+  - numeroDeVidaDeLasBarreras: ArrayList&lt;Integer&gt;
+  - numeroDeVidas: int
+  - numeroOleada: int
+  - puntuacion: int
+  - posicionNaveJugador: int[]
+
+  + cargarBarreras(): ArrayList&lt;Barrera&gt;
+  + cargarNaveJugador(): NaveJugador
+  + cargarEnjambre1(): Enjambre
+  + cargarEnjambre2(): Enjambre
+  + cargarEnjambre3(): Enjambre
+  + obtenerNumeroDeOleada(): int
+  + obtenerPuntaje(): int
+  + generarEnjambre1(): ArrayList&lt;NaveEnemigo&gt;
+  + generarEnjambre2(): ArrayList&lt;NaveEnemigo&gt;
+  + generarEnjambre3(): ArrayList&lt;NaveEnemigo&gt;
+  + guardarPartida(): void
+  + actualizarDatos(ArrayList&lt;int[]&gt;, ArrayList&lt;int[]&gt;, ArrayList&lt;int[]&gt;, int, int, int, int, ArrayList&lt;Barrera&gt;): void
+}
+class Pintor {
+  - ventanaPuntuaciones: VentanaPuntuaciones
+  - ventanaMenu: Menú
+  - panel: PanelDeJuego
+  - ventanaFinDeJuego: VentanaFinDeJuego
+  - fondo: Image
+  - imagenMenu: Image
+  - imagenProyectil: Image
+  - imagenFinDelJuego: Image
+  - imagenNaveJugador: Image
+  - imagenPuntuaciones: Image
+  - imagenNaveEnemigoDos: Image
+  - imagenNaveEnemigoUno: Image
+  - imagenNaveEnemigoTres: Image
+  - imagenProyectilEnemigo: Image
+  - imagenExplosionJugador: Image
+  - imagenBarreraCleanCode: Image
+  - imagenModificadorVidaExtra: Image
+  - imagenModificadorPolitecnico: Image
+  - imagenModificadorVelocidadAumentada: Image
+  - imagenModificadorVelocidadDisparoJugador: Image
+  + actualizar(): void
+  - seDebePintarExplosion: boolean
+  + permitirDibujarExplosion(): void
+  + prohibirPintarExplosion(): void
+  + paintComponent(Graphics): void
+  - dibujarVidasEnPantalla(Graphics): void
+  - dibujarProyectiles(Graphics): void
+  - dibujarEnjambreDos(Graphics): void
+  - dibujarPuntajesEnPantalla(Graphics): void
+  - dibujarProyectilesEnemigos(Graphics): void
+  - dibujarEnjambreUno(Graphics): void
+  - dibujarBarreras(Graphics): void
+  - dibujarModificadores(Graphics): void
+  - dibujarEnemigos(Graphics): void
+  - dibujarNave(Graphics): void
+  - dibujarContenidoDePuntajes(Graphics): void
+  - dibujarEnjambreTres(Graphics): void
+  - dibujarExplosionJugador(Graphics): void
+  - dibujarFondo(Graphics): void
+  + mensajeInicial(Graphics): void
+  - mensajeFinal(Graphics): void
+}
+
+class ReproductorMúsica {
+  - clip: Clip
+  + reproducir(): void
+  + detener(): void
+  + bucle(): void
+}
+
+class VentanaDePausa {
+  - panelDeJuego: PanelDeJuego
+  - panelDeJuegoData: PanelDeJuegoData
+  - botonGuardar: JButton
+  - botonSalir: JButton
+  - botonRegresarAlMenú: JButton
+  - botonReanudar: JButton
+}
+class VentanaFinDeJuego {
+  - salirBoton: JButton
+  - puntajeDelPartida: int
+  - reintentarBoton: JButton
+  - nombreDelJugador: JTextField
+  - reproductorMusica: ReproductorMúsica
+  + actionPerformed(ActionEvent): void
+  - mostrarVentanaFinal(): void
+}
+class VentanaPartidaGuardada {
+  - gestionDePartidas: GestorDePartidas
+  - panelDeJuegoData: PanelDeJuegoData
+  - obtenerPartidaGuardada(): PanelDeJuegoData?
+  + obtenerPanelDeJuegoGuardado(): PanelDeJuegoData
+}
+class VentanaPuntuaciones {
+  - pintor: Pintor
+  - puntuaciones: List&lt;Puntaje&gt;
+  + getPuntuaciones(): List&lt;Puntaje&gt;
+  + leerPuntuaciones(String): List&lt;Puntaje&gt;
+}
+
+}
+
+
+
+package Logica {
+class ActualizadorEntidades {
+  - actualizarNave(NaveJugador): void
+  - actualizarEnjambres(Enjambre[]): void
+  - actualizarBarrera(ArrayList&lt;Barrera&gt;): void
+  - actualizarProyectilesDelJugador(NaveJugador): void
+  - actualizarModificadores(ArrayList&lt;Modificador&gt;): void
+  - actualizarProyectilesDelEnemigo(ArrayList&lt;NaveEnemigo&gt;): void
+  + actualizarEntidades(NaveJugador, ArrayList&lt;NaveEnemigo&gt;, ArrayList&lt;Barrera&gt;, ArrayList&lt;Modificador&gt;, Enjambre[]): void
+}
+class Barrera {
+  - vidas: int
+  + reducirVida(): void
+  + obtenerNumeroDeVidas(): int
+  + fijarVida(int): void
+}
+class CalaveraMágica {
+  # PUNTOS_DEL_ENEMIGO: int
+}
+class ComparadorDePuntajes {
+  + compare(Puntaje, Puntaje): int
+}
+class ControladorDeTeclas {
+  - naveJugador: NaveJugador
+  - panel: PanelDeJuego
+  + teclaLiberada(KeyEvent): void
+  + keyPressed(KeyEvent): void
+  - sePulsaEscape(int): boolean
+  + keyReleased(KeyEvent): void
+  + teclaPresionada(KeyEvent): void
+  - sePulsaTeclaDerecha(int): boolean
+  - sePulsaTeclaIzquierda(int): boolean
+  - sePulsaBarraEspaciadora(int): boolean
+}
+class Enjambre {
+  # numeroFilasGenerado: int
+  # numeroColumnas: int
+  # numeroFilas: int
+  # enemigo: NaveEnemigo
+  - numeroOleada: int
+  - movimientoEnjambre: MovimientoEnjambre
+  + mover(): void
+  + generarDisparos(): void
+  + agregarEnjambre(int, int): void
+  + obtenerNumeroDeOleada(): int
+  + recibirMovimiento(MovimientoEnjambre): void
+  + generarEnemigosDelEnjambre(int, int): void
+  ~ enjambre: ArrayList&lt;NaveEnemigo&gt;
+  + recibirEnjambre(ArrayList&lt;NaveEnemigo&gt;): void
+  + obtenerEnjambreDeEnemigos(): ArrayList&lt;NaveEnemigo&gt;
+}
+class EnjambreDeCalaverasMágicas {
+  + generarEnemigosDelEnjambre(int, int): void
+}
+class EnjambreDeGatosPlatillos {
+  + generarEnemigosDelEnjambre(int, int): void
+}
+class EnjambreDePlatillosMalos {
+  + generarEnemigosDelEnjambre(int, int): void
+}
+class Entidad {
+  - ancho: int
+  - posicionEnX: double
+  - velocidad: int
+  - posicionEnY: int
+  - alto: int
+  + estaFueraDelMapa(): boolean
+  + actualizarVelocidad(int): void
+  + fijarNuevaPosicionEnX(int): void
+  + fijarNuevaPosicionEnY(int): void
+  + obtenerPosicionEnX(): int
+  + obtenerPosicionEnY(): int
+  + obtenerVelocidad(): int
+  + obtenerAncho(): int
+  + obtenerHitbox(): Rectangle
+}
+class GatoPlatillo {
+  # PUNTOS_DEL_ENEMIGO: int
+}
+class GestorDePartidas {
+  + cargarPartida(String): PanelDeJuegoData
+  + guardarPartida(PanelDeJuegoData, String): void
+}
+abstract class Modificador {
+  - movimientoAbajo: MovimientoAbajo
+  - visible: boolean
+  + mover(): void
+  + aplicarEfecto(Nave): void
+  + setVisible(boolean): void
+  + obtenerPosicion(): int[]
+  + obtenerVelocidad(): int
+}
+interface Movimiento &lt;&lt; interface &gt;&gt; {
+  + mover(Entidad): void
+}
+class MovimientoAbajo {
+  + mover(Entidad): void
+}
+class MovimientoDerecha {
+  - direccion: int
+  + mover(Entidad): void
+}
+class MovimientoEnjambre {
+  - enjambre: ArrayList&lt;NaveEnemigo&gt;
+  - direccion: int
+  - unidadesDescendidas: int
+  - descendiendo: boolean
+  ~ movimientoIzquierda: Movimiento
+  ~ movimientoDerecha: Movimiento
+  ~ movimientoAbajo: Movimiento
+  + mover(Entidad): void
+}
+class MovimientoIzquierda {
+  - direccion: int
+  + mover(Entidad): void
+}
+class MovimientoNaveJugador {
+  - distanciaDesplazada: int
+  - ANCHO_NAVE: int
+  - LIMITE_DERECHO: int
+  + mover(Entidad): void
+  + fijarDistanciaDesplazada(int): void
+  - estaEnElLimiteDerecho(Entidad): boolean
+  - estaEnElLimiteIzquierdo(Entidad): boolean
+}
+abstract class Nave {
+  # disparar(): void
+  + obtenerHitBox(): Rectangle
+  + aplicarModificador(Modificador): void
+}
+abstract class NaveEnemigo {
+  - random: Random
+  - ANCHO_NAVE: int
+  + puntosDelEnemigo: int
+  - proyectilEnemigo: List&lt;ProyectilDelEnemigo&gt;
+  - modificadorPorOleada: int
+  # puedeDisparar: boolean
+  - probabilidadDeDisparo: int
+  + disparar(): void
+  + debeDisparar(): boolean
+  + aumentarProbabilidadDeDisparo(): void
+  + generarModificador(): Modificador
+  - establecerTipoDeModificador(): Modificador?
+  - puedeGenerarModificador(): boolean
+  + aplicarModificador(Modificador): void
+  + getPuntosDelEnemigo(): int
+  + obtenerProyectiles(): List&lt;ProyectilDelEnemigo&gt;
+}
+class NaveJugador {
+  - timer: Timer
+  + ANCHO_NAVE: int
+  + numeroDeVidas: int
+  - sonidoDisparo: ReproductorMúsica
+  - velocidadDisparo: int
+  - velocidadDisparoInicial: int
+  - proyectiles: List&lt;ProyectilDelJugador&gt;
+  - movimiento: MovimientoNaveJugador
+  - puedeDisparar: boolean
+  - temporizadorDisparo: Timer
+  + mover(): void
+  + disparar(): void
+  - iniciarNave(): void
+  + actualizarValores(): void
+  - actualizarTemporizador(): void
+  + volverAlPuntoDeRespawn(): void
+  + obtenerVidasDisponibles(): int
+  + obtenerProyectiles(): List&lt;ProyectilDelJugador&gt;
+  + actualizarNumeroDeVidas(int): void
+  + fijarDistanciaDesplazada(int): void
+  + aumentarVelocidadDeDisparo(int): void
+  + aplicarModificador(Modificador): void
+  + restablecerVelocidadDeDisparo(): void
+}
+class PlatilloMalo {
+  # PUNTOS_DEL_ENEMIGO: int
+}
+class Politecnico {
+  + aplicarEfecto(Nave): void
+}
+abstract class Proyectil {
+  + ANCHO_PROYECTIL: int
+  - visible: boolean
+  + mover(): void
+  + esVisible(): boolean
+  + setVisible(boolean): void
+  - proyectilLlegoAlLimite(): boolean
+}
+class ProyectilDelEnemigo
+class ProyectilDelJugador
+
+class Puntaje {
+  - nombre: String
+  - puntaje: int
+  + getNombre(): String
+  + getPuntaje(): int
+}
+class VelocidadAumentada {
+  + aplicarEfecto(Nave): void
+}
+class VelocidadDeDisparoAumentada {
+  + aplicarEfecto(Nave): void
+}
+class VerificadorDeColisiones {
+  + puntajeTotal: int
+  - ventanaFinDeJuegoAbierta: boolean
+  - administrador: AdministradorGeneral
+  + getPuntajeTotal(): int
+  + actualizarPuntaje(int): void
+  + generarVentanaFinDelJuego(int): void
+  - llegoAlLimiteInferior(NaveEnemigo): boolean
+  - verificarColisionEnemigoConLimiteInferior(ArrayList&lt;NaveEnemigo&gt;): void
+  - verificarColisionJugadorYNavesEnemigas(Rectangle, List&lt;NaveEnemigo&gt;): void
+  - verificarColisionesJugadorYProyectilEnemigo(Rectangle, List&lt;NaveEnemigo&gt;, NaveJugador): void
+  - verificarEntidadFueraDelMapa(NaveJugador, ArrayList&lt;NaveEnemigo&gt;, ArrayList&lt;Modificador&gt;): void
+  - verificarColisionesProyectilesBarreras(ArrayList&lt;Barrera&gt;, NaveJugador, ArrayList&lt;NaveEnemigo&gt;): void
+  - verificarColisionesEnemigosYProyectilesDelJugador(List&lt;ProyectilDelJugador&gt;, List&lt;NaveEnemigo&gt;): void
+  - verificarColisionesProyectilYProyectilEnemigo(List&lt;ProyectilDelJugador&gt;, ArrayList&lt;NaveEnemigo&gt;): void
+  - verificarColisionesJugadorModificador(NaveJugador, ArrayList&lt;Modificador&gt;, ArrayList&lt;NaveEnemigo&gt;): void
+  + verificarColisiones(NaveJugador, ArrayList&lt;NaveEnemigo&gt;, ArrayList&lt;Modificador&gt;, ArrayList&lt;Barrera&gt;): void
+}
+class VidaExtra {
+  + aplicarEfecto(Nave): void
+}
+class NoExisteLaPartidaGuardadaException
+}
+
+
+
+
+
+
+
+Menú                                -.&gt;   Escenario
+Menú                                --&gt;   VentanaPuntuaciones
+Menú                                --&gt;   VentanaPartidaGuardada
+Menú                                --&gt;   ReproductorMúsica
+VentanaFinDeJuego                   --&gt;   ReproductorMúsica
+VentanaPuntuaciones                 --&gt;   Puntaje
+VentanaPartidaGuardada              -.&gt;   NoExisteLaPartidaGuardadaException
+Escenario                           --&gt;   PanelDeJuego
+PanelDeJuego                        --&gt;   VentanaDePausa
+PanelDeJuego                        --&gt;   AdministradorGeneral
+PanelDeJuego                        --&gt;   Entidad
+PanelDeJuego                        --&gt;   ReproductorMúsica
+PanelDeJuego                        --&gt;   PanelDeJuegoData
+PanelDeJuego                        --&gt;   Pintor
+PanelDeJuegoData                    --&gt;   GestorDePartidas
+VerificadorDeColisiones             -.&gt;   VentanaFinDeJuego
+Pintor                              --&gt;   PanelDeJuego
+Pintor                              --&gt;   VentanaPuntuaciones
+Pintor                              --&gt;   VentanaFinDeJuego
+Pintor                              --&gt;   Menú
+
+
+
+NaveJugador                         --&gt;   MovimientoNaveJugador
+NaveJugador                         --&gt;   ReproductorMúsica
+Enjambre                            --&gt;   MovimientoEnjambre
+PanelDeJuego                        --&gt;   ControladorDeTeclas
+AdministradorGeneral                --&gt;   ActualizadorEntidades
+AdministradorGeneral                --&gt;   VerificadorDeColisiones
+Puntaje                             -.&gt;   ComparadorDePuntajes
+Barrera                             --|&gt;  Entidad
+CalaveraMágica                      --|&gt;  NaveEnemigo
+EnjambreDeCalaverasMágicas          --|&gt;  Enjambre
+EnjambreDeGatosPlatillos            --|&gt;  Enjambre
+EnjambreDePlatillosMalos            --|&gt;  Enjambre
+GatoPlatillo                        --|&gt;  NaveEnemigo
+Modificador                         --|&gt;  Entidad
+MovimientoAbajo                     -.|&gt;  Movimiento
+MovimientoDerecha                   -.|&gt;  Movimiento
+MovimientoEnjambre                  -.|&gt;  Movimiento
+MovimientoIzquierda                 -.|&gt;  Movimiento
+MovimientoNaveJugador               -.|&gt;  Movimiento
+Nave                                --|&gt;  Entidad
+NaveEnemigo                         --|&gt;  Nave
+NaveJugador                         --|&gt;  Nave
+PlatilloMalo                        --|&gt;  NaveEnemigo
+Politecnico                         --|&gt;  Modificador
+Proyectil                           --|&gt;  Entidad
+ProyectilDelEnemigo                 --|&gt;  Proyectil
+ProyectilDelJugador                 --|&gt;  Proyectil
+VelocidadAumentada                  --|&gt;  Modificador
+VelocidadDeDisparoAumentada         --|&gt;  Modificador
+VidaExtra                           --|&gt;  Modificador
+@enduml
+</pre><p><a class="btn" href="SpaceInvader_original.puml">Descargar .puml</a></p></section></main></body></html>

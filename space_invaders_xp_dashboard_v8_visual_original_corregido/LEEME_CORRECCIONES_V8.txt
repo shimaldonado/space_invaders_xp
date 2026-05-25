@@ -1,0 +1,15 @@
+Space Invaders XP Dashboard - V8 corregida
+
+Se restauró la interfaz visual original y se corrigió lo siguiente:
+- Las secciones ya no quedan vacías al navegar por el menú lateral.
+- Las métricas se recalculan desde las HU, pruebas y bugs actuales del dashboard.
+- En Línea de tiempo ahora hay botones por iteración: Avanzar iteración y Reabrir / retrabajo.
+- Abrir Jira y Abrir TestRail se mantienen como enlaces directos.
+- Para guardar cambios permanentes, usar Guardar cambios.
+
+Comandos:
+npm install
+node server.js
+
+Si sale EADDRINUSE porque el puerto 3000 está ocupado, cierra el servidor anterior con Ctrl+C o ejecuta en PowerShell:
+$env:PORT=3001; node server.js

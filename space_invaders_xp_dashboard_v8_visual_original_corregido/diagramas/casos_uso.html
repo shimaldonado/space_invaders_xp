@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Diagrama de casos de uso | Space Invaders XP</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <main class="main" style="max-width:1200px;margin:0 auto;">
+    <div class="hero" style="margin-top:20px;">
+      <span class="tag">Diagrama simplificado</span>
+      <h2>Casos de uso del juego Space Invaders</h2>
+      <p>Se reorganizó el diagrama para que se vea limpio, entendible y sin exceso de líneas cruzadas.</p>
+      <div class="hero-actions">
+        <a class="btn" href="../index.html#diagramas">← Volver a diagramas</a>
+        <a class="btn" href="../index.html">← Volver al dashboard</a>
+      </div>
+    </div>
+
+    <section class="card">
+      <svg viewBox="0 0 1180 760" width="100%" role="img" aria-label="Diagrama de casos de uso simplificado de Space Invaders">
+        <defs>
+          <linearGradient id="ucg" x1="0" x2="1">
+            <stop offset="0%" stop-color="#dbeafe"/>
+            <stop offset="100%" stop-color="#eef2ff"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="240" y="60" width="860" height="620" rx="24" fill="#f8fbff" stroke="#c7d6ea" stroke-width="2"/>
+        <text x="270" y="100" font-size="28" font-weight="700" fill="#0f172a">Sistema: Space Invaders</text>
+
+        <circle cx="110" cy="180" r="28" fill="#ffffff" stroke="#1d4ed8" stroke-width="3"/>
+        <line x1="110" y1="208" x2="110" y2="300" stroke="#1d4ed8" stroke-width="4"/>
+        <line x1="70" y1="235" x2="150" y2="235" stroke="#1d4ed8" stroke-width="4"/>
+        <line x1="110" y1="300" x2="75" y2="360" stroke="#1d4ed8" stroke-width="4"/>
+        <line x1="110" y1="300" x2="145" y2="360" stroke="#1d4ed8" stroke-width="4"/>
+        <text x="68" y="410" font-size="28" font-weight="700" fill="#0f172a">Jugador</text>
+
+        <!-- use case ovals -->
+        <g font-size="18" fill="#0f172a" text-anchor="middle">
+          <ellipse cx="410" cy="170" rx="135" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="410" y="176">Iniciar partida</text>
+
+          <ellipse cx="410" cy="280" rx="135" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="410" y="286">Mover nave</text>
+
+          <ellipse cx="410" cy="390" rx="135" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="410" y="396">Disparar proyectiles</text>
+
+          <ellipse cx="410" cy="500" rx="135" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="410" y="506">Pausar / reanudar</text>
+
+          <ellipse cx="730" cy="170" rx="150" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="730" y="176">Eliminar enemigos</text>
+
+          <ellipse cx="730" cy="280" rx="150" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="730" y="286">Ganar puntos</text>
+
+          <ellipse cx="730" cy="390" rx="150" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="730" y="396">Guardar / cargar partida</text>
+
+          <ellipse cx="730" cy="500" rx="150" ry="38" fill="url(#ucg)" stroke="#8cb3ff" stroke-width="2"/>
+          <text x="730" y="506">Consultar puntuaciones</text>
+        </g>
+
+        <!-- clean actor connections -->
+        <g stroke="#3b82f6" stroke-width="2.5" fill="none">
+          <line x1="160" y1="180" x2="275" y2="170"/>
+          <line x1="160" y1="220" x2="275" y2="280"/>
+          <line x1="160" y1="250" x2="275" y2="390"/>
+          <line x1="160" y1="275" x2="275" y2="500"/>
+        </g>
+
+        <!-- simple extends/includes -->
+        <g stroke="#94a3b8" stroke-width="2" fill="none" stroke-dasharray="8 7">
+          <line x1="545" y1="170" x2="580" y2="170"/>
+          <line x1="545" y1="390" x2="580" y2="170"/>
+          <line x1="545" y1="390" x2="580" y2="280"/>
+          <line x1="545" y1="500" x2="580" y2="390"/>
+        </g>
+        <g font-size="14" fill="#475569">
+          <text x="555" y="160">incluye</text>
+          <text x="550" y="340">incluye</text>
+          <text x="552" y="445">extiende</text>
+        </g>
+
+        <rect x="280" y="600" width="760" height="48" rx="12" fill="#eef2ff" stroke="#c7d2fe"/>
+        <text x="660" y="629" text-anchor="middle" font-size="18" fill="#334155">El jugador interactúa con el juego para iniciar, controlar la nave, disparar, pausar y gestionar su progreso.</text>
+      </svg>
+    </section>
+  </main>
+</body>
+</html>

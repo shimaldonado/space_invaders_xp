@@ -1,0 +1,481 @@
+@startuml
+skinparam linetype ortho
+
+package Presentacion {
+class AdministradorGeneral {
+  - panelDeJuego: PanelDeJuego
+  - verificadorDeColisiones: VerificadorDeColisiones
+  - actualizadorEntidades: ActualizadorEntidades
+  + getJFrame(): JFrame
+  + cargarPartida(PanelDeJuegoData): void
+  + verficarExistenciaEnemigos(ArrayList<NaveEnemigo>): void
+  + activarPausaDeReaparicion(): void
+  + agregarModificador(Modificador): void
+  + obtenerPuntuaciones(): int
+  + limpiarProyectilesDeLaVentana(): void
+  + iniciarCompetencias(ArrayList<Modificador>, NaveJugador, ArrayList<NaveEnemigo>, ArrayList<Barrera>, Enjambre[]): void
+  + detenerMusica(): void
+  + reproducirExplosionEnemigo(): void
+  + reproducirExplosionJugador(): void
+}
+class Escenario
+class Menú {
+  + ALTO: int
+  + ANCHO: int
+  - botonPuntuaciones: JButton
+  - botonCargarPartida: JButton
+  - botonIniciarJuego: JButton
+  - botonSalir: JButton
+  - reproductorDeMúsica: ReproductorMúsica
+  + actionPerformed(ActionEvent): void
+  - abrirVentanaJuego(): void
+}
+
+
+class PanelDeJuego {
+  + ALTO: int
+  + ANCHO: int
+  - jFrame: JFrame
+  - pintor: Pintor
+  - temporizador: Timer
+  - controladorDeTeclas: ControladorDeTeclas
+  - nave: NaveJugador
+  - enemigos: ArrayList<NaveEnemigo>
+  - enjambre1: Enjambre
+  - enjambre2: Enjambre
+  - enjambre3: Enjambre
+  - posicioInicialDelEnemigoEnY: int
+  - posicioInicialDelEnemigoEnX: int
+  - numeroOleada: int
+  - barreras: ArrayList<Barrera>
+  - modificadores: ArrayList<Modificador>
+  - ventanaDePausa: VentanaDePausa
+  - administradorGeneral: AdministradorGeneral
+  - panelDeJuegoData: PanelDeJuegoData
+  - reproductorDeMúsica: ReproductorMúsica
+  - reproductorDeExplosionEnemigo: ReproductorMúsica
+  - reproductorDeExplosionJugador: ReproductorMúsica
+
+  + getJFrame(): JFrame
+  + pausarJuego(): void
+  - iniciarPanel(): void
+  + reanudarJuego(): void
+  - cargarPartida(): void
+  + pausaDeReaparicion(): void
+  + aumentarNumeroOleada(): void
+  + paintComponent(Graphics): void
+  + actionPerformed(ActionEvent): void
+  + limpiarProyectilesDeLaVentana(): void
+  + agregarModificador(Modificador): void
+  + detenerMusica(): void
+  + agregarEnemigos(): void
+  + reproducirExplosionEnemigo(): void
+  + reproducirExplosionJugador(): void
+  + getPuntajeTotal(): int
+  + obtenerVidasJugador(): int
+  + obtenerPosicionEnYNave(): int
+  + obtenerPosicionEnXNave(): int
+  + obtenerBarreras(): ArrayList<Barrera>
+  + obtenerModificadores(): ArrayList<Modificador>
+  + obtenerPosicionesProyectiles(): ArrayList<int[]>
+  + obtenerPosicionesEnjambreDos(): ArrayList<int[]>
+  + obtenerPosicionesEnjambreUno(): ArrayList<int[]>
+  + obtenerPosicionesEnjambreTres(): ArrayList<int[]>
+  + obtenerPosicionesModificadores(): ArrayList<int[]>
+  + obtenerPosicionesProyectilesEnemigos(): ArrayList<int[]>
+
+}
+class PanelDeJuegoData {
+  - posicionesEnjambre1: ArrayList<int[]>
+  - posicionesEnjambre2: ArrayList<int[]>
+  - posicionesEnjambre3: ArrayList<int[]>
+  - numeroDeVidaDeLasBarreras: ArrayList<Integer>
+  - numeroDeVidas: int
+  - numeroOleada: int
+  - puntuacion: int
+  - posicionNaveJugador: int[]
+
+  + cargarBarreras(): ArrayList<Barrera>
+  + cargarNaveJugador(): NaveJugador
+  + cargarEnjambre1(): Enjambre
+  + cargarEnjambre2(): Enjambre
+  + cargarEnjambre3(): Enjambre
+  + obtenerNumeroDeOleada(): int
+  + obtenerPuntaje(): int
+  + generarEnjambre1(): ArrayList<NaveEnemigo>
+  + generarEnjambre2(): ArrayList<NaveEnemigo>
+  + generarEnjambre3(): ArrayList<NaveEnemigo>
+  + guardarPartida(): void
+  + actualizarDatos(ArrayList<int[]>, ArrayList<int[]>, ArrayList<int[]>, int, int, int, int, ArrayList<Barrera>): void
+}
+class Pintor {
+  - ventanaPuntuaciones: VentanaPuntuaciones
+  - ventanaMenu: Menú
+  - panel: PanelDeJuego
+  - ventanaFinDeJuego: VentanaFinDeJuego
+  - fondo: Image
+  - imagenMenu: Image
+  - imagenProyectil: Image
+  - imagenFinDelJuego: Image
+  - imagenNaveJugador: Image
+  - imagenPuntuaciones: Image
+  - imagenNaveEnemigoDos: Image
+  - imagenNaveEnemigoUno: Image
+  - imagenNaveEnemigoTres: Image
+  - imagenProyectilEnemigo: Image
+  - imagenExplosionJugador: Image
+  - imagenBarreraCleanCode: Image
+  - imagenModificadorVidaExtra: Image
+  - imagenModificadorPolitecnico: Image
+  - imagenModificadorVelocidadAumentada: Image
+  - imagenModificadorVelocidadDisparoJugador: Image
+  + actualizar(): void
+  - seDebePintarExplosion: boolean
+  + permitirDibujarExplosion(): void
+  + prohibirPintarExplosion(): void
+  + paintComponent(Graphics): void
+  - dibujarVidasEnPantalla(Graphics): void
+  - dibujarProyectiles(Graphics): void
+  - dibujarEnjambreDos(Graphics): void
+  - dibujarPuntajesEnPantalla(Graphics): void
+  - dibujarProyectilesEnemigos(Graphics): void
+  - dibujarEnjambreUno(Graphics): void
+  - dibujarBarreras(Graphics): void
+  - dibujarModificadores(Graphics): void
+  - dibujarEnemigos(Graphics): void
+  - dibujarNave(Graphics): void
+  - dibujarContenidoDePuntajes(Graphics): void
+  - dibujarEnjambreTres(Graphics): void
+  - dibujarExplosionJugador(Graphics): void
+  - dibujarFondo(Graphics): void
+  + mensajeInicial(Graphics): void
+  - mensajeFinal(Graphics): void
+}
+
+class ReproductorMúsica {
+  - clip: Clip
+  + reproducir(): void
+  + detener(): void
+  + bucle(): void
+}
+
+class VentanaDePausa {
+  - panelDeJuego: PanelDeJuego
+  - panelDeJuegoData: PanelDeJuegoData
+  - botonGuardar: JButton
+  - botonSalir: JButton
+  - botonRegresarAlMenú: JButton
+  - botonReanudar: JButton
+}
+class VentanaFinDeJuego {
+  - salirBoton: JButton
+  - puntajeDelPartida: int
+  - reintentarBoton: JButton
+  - nombreDelJugador: JTextField
+  - reproductorMusica: ReproductorMúsica
+  + actionPerformed(ActionEvent): void
+  - mostrarVentanaFinal(): void
+}
+class VentanaPartidaGuardada {
+  - gestionDePartidas: GestorDePartidas
+  - panelDeJuegoData: PanelDeJuegoData
+  - obtenerPartidaGuardada(): PanelDeJuegoData?
+  + obtenerPanelDeJuegoGuardado(): PanelDeJuegoData
+}
+class VentanaPuntuaciones {
+  - pintor: Pintor
+  - puntuaciones: List<Puntaje>
+  + getPuntuaciones(): List<Puntaje>
+  + leerPuntuaciones(String): List<Puntaje>
+}
+
+}
+
+
+
+package Logica {
+class ActualizadorEntidades {
+  - actualizarNave(NaveJugador): void
+  - actualizarEnjambres(Enjambre[]): void
+  - actualizarBarrera(ArrayList<Barrera>): void
+  - actualizarProyectilesDelJugador(NaveJugador): void
+  - actualizarModificadores(ArrayList<Modificador>): void
+  - actualizarProyectilesDelEnemigo(ArrayList<NaveEnemigo>): void
+  + actualizarEntidades(NaveJugador, ArrayList<NaveEnemigo>, ArrayList<Barrera>, ArrayList<Modificador>, Enjambre[]): void
+}
+class Barrera {
+  - vidas: int
+  + reducirVida(): void
+  + obtenerNumeroDeVidas(): int
+  + fijarVida(int): void
+}
+class CalaveraMágica {
+  # PUNTOS_DEL_ENEMIGO: int
+}
+class ComparadorDePuntajes {
+  + compare(Puntaje, Puntaje): int
+}
+class ControladorDeTeclas {
+  - naveJugador: NaveJugador
+  - panel: PanelDeJuego
+  + teclaLiberada(KeyEvent): void
+  + keyPressed(KeyEvent): void
+  - sePulsaEscape(int): boolean
+  + keyReleased(KeyEvent): void
+  + teclaPresionada(KeyEvent): void
+  - sePulsaTeclaDerecha(int): boolean
+  - sePulsaTeclaIzquierda(int): boolean
+  - sePulsaBarraEspaciadora(int): boolean
+}
+class Enjambre {
+  # numeroFilasGenerado: int
+  # numeroColumnas: int
+  # numeroFilas: int
+  # enemigo: NaveEnemigo
+  - numeroOleada: int
+  - movimientoEnjambre: MovimientoEnjambre
+  + mover(): void
+  + generarDisparos(): void
+  + agregarEnjambre(int, int): void
+  + obtenerNumeroDeOleada(): int
+  + recibirMovimiento(MovimientoEnjambre): void
+  + generarEnemigosDelEnjambre(int, int): void
+  ~ enjambre: ArrayList<NaveEnemigo>
+  + recibirEnjambre(ArrayList<NaveEnemigo>): void
+  + obtenerEnjambreDeEnemigos(): ArrayList<NaveEnemigo>
+}
+class EnjambreDeCalaverasMágicas {
+  + generarEnemigosDelEnjambre(int, int): void
+}
+class EnjambreDeGatosPlatillos {
+  + generarEnemigosDelEnjambre(int, int): void
+}
+class EnjambreDePlatillosMalos {
+  + generarEnemigosDelEnjambre(int, int): void
+}
+class Entidad {
+  - ancho: int
+  - posicionEnX: double
+  - velocidad: int
+  - posicionEnY: int
+  - alto: int
+  + estaFueraDelMapa(): boolean
+  + actualizarVelocidad(int): void
+  + fijarNuevaPosicionEnX(int): void
+  + fijarNuevaPosicionEnY(int): void
+  + obtenerPosicionEnX(): int
+  + obtenerPosicionEnY(): int
+  + obtenerVelocidad(): int
+  + obtenerAncho(): int
+  + obtenerHitbox(): Rectangle
+}
+class GatoPlatillo {
+  # PUNTOS_DEL_ENEMIGO: int
+}
+class GestorDePartidas {
+  + cargarPartida(String): PanelDeJuegoData
+  + guardarPartida(PanelDeJuegoData, String): void
+}
+abstract class Modificador {
+  - movimientoAbajo: MovimientoAbajo
+  - visible: boolean
+  + mover(): void
+  + aplicarEfecto(Nave): void
+  + setVisible(boolean): void
+  + obtenerPosicion(): int[]
+  + obtenerVelocidad(): int
+}
+interface Movimiento << interface >> {
+  + mover(Entidad): void
+}
+class MovimientoAbajo {
+  + mover(Entidad): void
+}
+class MovimientoDerecha {
+  - direccion: int
+  + mover(Entidad): void
+}
+class MovimientoEnjambre {
+  - enjambre: ArrayList<NaveEnemigo>
+  - direccion: int
+  - unidadesDescendidas: int
+  - descendiendo: boolean
+  ~ movimientoIzquierda: Movimiento
+  ~ movimientoDerecha: Movimiento
+  ~ movimientoAbajo: Movimiento
+  + mover(Entidad): void
+}
+class MovimientoIzquierda {
+  - direccion: int
+  + mover(Entidad): void
+}
+class MovimientoNaveJugador {
+  - distanciaDesplazada: int
+  - ANCHO_NAVE: int
+  - LIMITE_DERECHO: int
+  + mover(Entidad): void
+  + fijarDistanciaDesplazada(int): void
+  - estaEnElLimiteDerecho(Entidad): boolean
+  - estaEnElLimiteIzquierdo(Entidad): boolean
+}
+abstract class Nave {
+  # disparar(): void
+  + obtenerHitBox(): Rectangle
+  + aplicarModificador(Modificador): void
+}
+abstract class NaveEnemigo {
+  - random: Random
+  - ANCHO_NAVE: int
+  + puntosDelEnemigo: int
+  - proyectilEnemigo: List<ProyectilDelEnemigo>
+  - modificadorPorOleada: int
+  # puedeDisparar: boolean
+  - probabilidadDeDisparo: int
+  + disparar(): void
+  + debeDisparar(): boolean
+  + aumentarProbabilidadDeDisparo(): void
+  + generarModificador(): Modificador
+  - establecerTipoDeModificador(): Modificador?
+  - puedeGenerarModificador(): boolean
+  + aplicarModificador(Modificador): void
+  + getPuntosDelEnemigo(): int
+  + obtenerProyectiles(): List<ProyectilDelEnemigo>
+}
+class NaveJugador {
+  - timer: Timer
+  + ANCHO_NAVE: int
+  + numeroDeVidas: int
+  - sonidoDisparo: ReproductorMúsica
+  - velocidadDisparo: int
+  - velocidadDisparoInicial: int
+  - proyectiles: List<ProyectilDelJugador>
+  - movimiento: MovimientoNaveJugador
+  - puedeDisparar: boolean
+  - temporizadorDisparo: Timer
+  + mover(): void
+  + disparar(): void
+  - iniciarNave(): void
+  + actualizarValores(): void
+  - actualizarTemporizador(): void
+  + volverAlPuntoDeRespawn(): void
+  + obtenerVidasDisponibles(): int
+  + obtenerProyectiles(): List<ProyectilDelJugador>
+  + actualizarNumeroDeVidas(int): void
+  + fijarDistanciaDesplazada(int): void
+  + aumentarVelocidadDeDisparo(int): void
+  + aplicarModificador(Modificador): void
+  + restablecerVelocidadDeDisparo(): void
+}
+class PlatilloMalo {
+  # PUNTOS_DEL_ENEMIGO: int
+}
+class Politecnico {
+  + aplicarEfecto(Nave): void
+}
+abstract class Proyectil {
+  + ANCHO_PROYECTIL: int
+  - visible: boolean
+  + mover(): void
+  + esVisible(): boolean
+  + setVisible(boolean): void
+  - proyectilLlegoAlLimite(): boolean
+}
+class ProyectilDelEnemigo
+class ProyectilDelJugador
+
+class Puntaje {
+  - nombre: String
+  - puntaje: int
+  + getNombre(): String
+  + getPuntaje(): int
+}
+class VelocidadAumentada {
+  + aplicarEfecto(Nave): void
+}
+class VelocidadDeDisparoAumentada {
+  + aplicarEfecto(Nave): void
+}
+class VerificadorDeColisiones {
+  + puntajeTotal: int
+  - ventanaFinDeJuegoAbierta: boolean
+  - administrador: AdministradorGeneral
+  + getPuntajeTotal(): int
+  + actualizarPuntaje(int): void
+  + generarVentanaFinDelJuego(int): void
+  - llegoAlLimiteInferior(NaveEnemigo): boolean
+  - verificarColisionEnemigoConLimiteInferior(ArrayList<NaveEnemigo>): void
+  - verificarColisionJugadorYNavesEnemigas(Rectangle, List<NaveEnemigo>): void
+  - verificarColisionesJugadorYProyectilEnemigo(Rectangle, List<NaveEnemigo>, NaveJugador): void
+  - verificarEntidadFueraDelMapa(NaveJugador, ArrayList<NaveEnemigo>, ArrayList<Modificador>): void
+  - verificarColisionesProyectilesBarreras(ArrayList<Barrera>, NaveJugador, ArrayList<NaveEnemigo>): void
+  - verificarColisionesEnemigosYProyectilesDelJugador(List<ProyectilDelJugador>, List<NaveEnemigo>): void
+  - verificarColisionesProyectilYProyectilEnemigo(List<ProyectilDelJugador>, ArrayList<NaveEnemigo>): void
+  - verificarColisionesJugadorModificador(NaveJugador, ArrayList<Modificador>, ArrayList<NaveEnemigo>): void
+  + verificarColisiones(NaveJugador, ArrayList<NaveEnemigo>, ArrayList<Modificador>, ArrayList<Barrera>): void
+}
+class VidaExtra {
+  + aplicarEfecto(Nave): void
+}
+class NoExisteLaPartidaGuardadaException
+}
+
+
+
+
+
+
+
+Menú                                -.>   Escenario
+Menú                                -->   VentanaPuntuaciones
+Menú                                -->   VentanaPartidaGuardada
+Menú                                -->   ReproductorMúsica
+VentanaFinDeJuego                   -->   ReproductorMúsica
+VentanaPuntuaciones                 -->   Puntaje
+VentanaPartidaGuardada              -.>   NoExisteLaPartidaGuardadaException
+Escenario                           -->   PanelDeJuego
+PanelDeJuego                        -->   VentanaDePausa
+PanelDeJuego                        -->   AdministradorGeneral
+PanelDeJuego                        -->   Entidad
+PanelDeJuego                        -->   ReproductorMúsica
+PanelDeJuego                        -->   PanelDeJuegoData
+PanelDeJuego                        -->   Pintor
+PanelDeJuegoData                    -->   GestorDePartidas
+VerificadorDeColisiones             -.>   VentanaFinDeJuego
+Pintor                              -->   PanelDeJuego
+Pintor                              -->   VentanaPuntuaciones
+Pintor                              -->   VentanaFinDeJuego
+Pintor                              -->   Menú
+
+
+
+NaveJugador                         -->   MovimientoNaveJugador
+NaveJugador                         -->   ReproductorMúsica
+Enjambre                            -->   MovimientoEnjambre
+PanelDeJuego                        -->   ControladorDeTeclas
+AdministradorGeneral                -->   ActualizadorEntidades
+AdministradorGeneral                -->   VerificadorDeColisiones
+Puntaje                             -.>   ComparadorDePuntajes
+Barrera                             --|>  Entidad
+CalaveraMágica                      --|>  NaveEnemigo
+EnjambreDeCalaverasMágicas          --|>  Enjambre
+EnjambreDeGatosPlatillos            --|>  Enjambre
+EnjambreDePlatillosMalos            --|>  Enjambre
+GatoPlatillo                        --|>  NaveEnemigo
+Modificador                         --|>  Entidad
+MovimientoAbajo                     -.|>  Movimiento
+MovimientoDerecha                   -.|>  Movimiento
+MovimientoEnjambre                  -.|>  Movimiento
+MovimientoIzquierda                 -.|>  Movimiento
+MovimientoNaveJugador               -.|>  Movimiento
+Nave                                --|>  Entidad
+NaveEnemigo                         --|>  Nave
+NaveJugador                         --|>  Nave
+PlatilloMalo                        --|>  NaveEnemigo
+Politecnico                         --|>  Modificador
+Proyectil                           --|>  Entidad
+ProyectilDelEnemigo                 --|>  Proyectil
+ProyectilDelJugador                 --|>  Proyectil
+VelocidadAumentada                  --|>  Modificador
+VelocidadDeDisparoAumentada         --|>  Modificador
+VidaExtra                           --|>  Modificador
+@enduml

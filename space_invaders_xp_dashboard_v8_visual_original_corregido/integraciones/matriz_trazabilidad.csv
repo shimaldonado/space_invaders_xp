@@ -1,0 +1,109 @@
+HU,Jira,Criterio,Gherkin,TestCase,TestRail,ResponsableDev,Tester
+HU-01,SIXP-1,CA-01,"Dado que el jugador está en el menú principal
+Cuando selecciona la opción Iniciar Juego
+Entonces el sistema abre el panel de juego con nave, enemigos, vidas y puntaje inicial.",TC-SIXP-001,C101,David,Diego
+HU-01,SIXP-1,CA-02,"Dado que el jugador está en el menú principal
+Cuando selecciona la opción Iniciar Juego
+Entonces el sistema abre el panel de juego con nave, enemigos, vidas y puntaje inicial.",TC-SIXP-002,C102,David,Diego
+HU-01,SIXP-1,CA-03,"Dado que el jugador está en el menú principal
+Cuando selecciona la opción Iniciar Juego
+Entonces el sistema abre el panel de juego con nave, enemigos, vidas y puntaje inicial.",TC-SIXP-003,C103,David,Diego
+HU-02,SIXP-2,CA-01,"Dado que la partida está activa
+Cuando el jugador presiona izquierda o derecha
+Entonces la nave cambia su posición sin salir del área de juego.",TC-SIXP-004,C104,Kevin,Diego
+HU-02,SIXP-2,CA-02,"Dado que la partida está activa
+Cuando el jugador presiona izquierda o derecha
+Entonces la nave cambia su posición sin salir del área de juego.",TC-SIXP-005,C105,Kevin,Diego
+HU-02,SIXP-2,CA-03,"Dado que la partida está activa
+Cuando el jugador presiona izquierda o derecha
+Entonces la nave cambia su posición sin salir del área de juego.",TC-SIXP-006,C106,Kevin,Diego
+HU-03,SIXP-3,CA-01,"Dado que la partida está activa
+Cuando el jugador presiona la tecla de disparo
+Entonces se crea un proyectil visible que avanza desde la nave hacia los enemigos.",TC-SIXP-007,C107,Kevin,Diego
+HU-03,SIXP-3,CA-02,"Dado que la partida está activa
+Cuando el jugador presiona la tecla de disparo
+Entonces se crea un proyectil visible que avanza desde la nave hacia los enemigos.",TC-SIXP-008,C108,Kevin,Diego
+HU-03,SIXP-3,CA-03,"Dado que la partida está activa
+Cuando el jugador presiona la tecla de disparo
+Entonces se crea un proyectil visible que avanza desde la nave hacia los enemigos.",TC-SIXP-009,C109,Kevin,Diego
+HU-04,SIXP-4,CA-01,"Dado que una partida inicia
+Cuando el sistema carga el escenario
+Entonces se muestran enemigos organizados en oleadas con movimiento controlado.",TC-SIXP-010,C110,Kevin,Diego
+HU-04,SIXP-4,CA-02,"Dado que una partida inicia
+Cuando el sistema carga el escenario
+Entonces se muestran enemigos organizados en oleadas con movimiento controlado.",TC-SIXP-011,C111,Kevin,Diego
+HU-04,SIXP-4,CA-03,"Dado que una partida inicia
+Cuando el sistema carga el escenario
+Entonces se muestran enemigos organizados en oleadas con movimiento controlado.",TC-SIXP-012,C112,Kevin,Diego
+HU-05,SIXP-5,CA-01,"Dado que existen proyectiles y enemigos en pantalla
+Cuando ocurre una colisión válida
+Entonces el sistema actualiza entidad, puntaje o vidas según corresponda.",TC-SIXP-013,C113,Kevin,Diego
+HU-05,SIXP-5,CA-02,"Dado que existen proyectiles y enemigos en pantalla
+Cuando ocurre una colisión válida
+Entonces el sistema actualiza entidad, puntaje o vidas según corresponda.",TC-SIXP-014,C114,Kevin,Diego
+HU-05,SIXP-5,CA-03,"Dado que existen proyectiles y enemigos en pantalla
+Cuando ocurre una colisión válida
+Entonces el sistema actualiza entidad, puntaje o vidas según corresponda.",TC-SIXP-015,C115,Kevin,Diego
+HU-06,SIXP-6,CA-01,"Dado que la partida está activa
+Cuando un proyectil impacta una barrera
+Entonces el sistema aplica la regla de daño y evita que el proyectil continúe.",TC-SIXP-016,C116,Kevin,Diego
+HU-06,SIXP-6,CA-02,"Dado que la partida está activa
+Cuando un proyectil impacta una barrera
+Entonces el sistema aplica la regla de daño y evita que el proyectil continúe.",TC-SIXP-017,C117,Kevin,Diego
+HU-06,SIXP-6,CA-03,"Dado que la partida está activa
+Cuando un proyectil impacta una barrera
+Entonces el sistema aplica la regla de daño y evita que el proyectil continúe.",TC-SIXP-018,C118,Kevin,Diego
+HU-07,SIXP-7,CA-01,"Dado que una partida está en ejecución
+Cuando el jugador activa la pausa
+Entonces el sistema detiene el movimiento y muestra opciones de pausa.",TC-SIXP-019,C119,David,Diego
+HU-07,SIXP-7,CA-02,"Dado que una partida está en ejecución
+Cuando el jugador activa la pausa
+Entonces el sistema detiene el movimiento y muestra opciones de pausa.",TC-SIXP-020,C120,David,Diego
+HU-07,SIXP-7,CA-03,"Dado que una partida está en ejecución
+Cuando el jugador activa la pausa
+Entonces el sistema detiene el movimiento y muestra opciones de pausa.",TC-SIXP-021,C121,David,Diego
+HU-08,SIXP-8,CA-01,"Dado que existe una partida guardada
+Cuando el jugador selecciona cargar partida
+Entonces el sistema restaura el estado de juego sin cerrar la aplicación.",TC-SIXP-022,C122,Kevin,Diego
+HU-08,SIXP-8,CA-02,"Dado que existe una partida guardada
+Cuando el jugador selecciona cargar partida
+Entonces el sistema restaura el estado de juego sin cerrar la aplicación.",TC-SIXP-023,C123,Kevin,Diego
+HU-08,SIXP-8,CA-03,"Dado que existe una partida guardada
+Cuando el jugador selecciona cargar partida
+Entonces el sistema restaura el estado de juego sin cerrar la aplicación.",TC-SIXP-024,C124,Kevin,Diego
+HU-09,SIXP-9,CA-01,"Dado que el jugador está en el menú
+Cuando selecciona Puntuaciones
+Entonces el sistema muestra el ranking ordenado de mejores puntajes.",TC-SIXP-025,C125,David,Diego
+HU-09,SIXP-9,CA-02,"Dado que el jugador está en el menú
+Cuando selecciona Puntuaciones
+Entonces el sistema muestra el ranking ordenado de mejores puntajes.",TC-SIXP-026,C126,David,Diego
+HU-09,SIXP-9,CA-03,"Dado que el jugador está en el menú
+Cuando selecciona Puntuaciones
+Entonces el sistema muestra el ranking ordenado de mejores puntajes.",TC-SIXP-027,C127,David,Diego
+HU-10,SIXP-10,CA-01,"Dado que el juego ejecuta una acción sonora
+Cuando ocurre disparo, explosión o fin de juego
+Entonces el sistema reproduce el efecto correspondiente sin detener la partida.",TC-SIXP-028,C128,David,Diego
+HU-10,SIXP-10,CA-02,"Dado que el juego ejecuta una acción sonora
+Cuando ocurre disparo, explosión o fin de juego
+Entonces el sistema reproduce el efecto correspondiente sin detener la partida.",TC-SIXP-029,C129,David,Diego
+HU-10,SIXP-10,CA-03,"Dado que el juego ejecuta una acción sonora
+Cuando ocurre disparo, explosión o fin de juego
+Entonces el sistema reproduce el efecto correspondiente sin detener la partida.",TC-SIXP-030,C130,David,Diego
+HU-11,SIXP-11,CA-01,"Dado que un modificador aparece en pantalla
+Cuando la nave del jugador lo recoge
+Entonces el sistema aplica el efecto correspondiente a la nave.",TC-SIXP-031,C131,Kevin,Diego
+HU-11,SIXP-11,CA-02,"Dado que un modificador aparece en pantalla
+Cuando la nave del jugador lo recoge
+Entonces el sistema aplica el efecto correspondiente a la nave.",TC-SIXP-032,C132,Kevin,Diego
+HU-11,SIXP-11,CA-03,"Dado que un modificador aparece en pantalla
+Cuando la nave del jugador lo recoge
+Entonces el sistema aplica el efecto correspondiente a la nave.",TC-SIXP-033,C133,Kevin,Diego
+HU-12,SIXP-12,CA-01,"Dado que el jugador pierde todas sus vidas
+Cuando se cumple la condición de fin de juego
+Entonces el sistema muestra la ventana final con puntaje y opciones de salida.",TC-SIXP-034,C134,David,Diego
+HU-12,SIXP-12,CA-02,"Dado que el jugador pierde todas sus vidas
+Cuando se cumple la condición de fin de juego
+Entonces el sistema muestra la ventana final con puntaje y opciones de salida.",TC-SIXP-035,C135,David,Diego
+HU-12,SIXP-12,CA-03,"Dado que el jugador pierde todas sus vidas
+Cuando se cumple la condición de fin de juego
+Entonces el sistema muestra la ventana final con puntaje y opciones de salida.",TC-SIXP-036,C136,David,Diego

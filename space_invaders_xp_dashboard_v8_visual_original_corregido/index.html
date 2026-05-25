@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard | Space Invaders XP</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🚀</div>
+        <div>
+          <h1>Space Invaders XP</h1>
+          <small>Dashboard metodológico del juego aplicado con XP</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#inicio" class="active">Resumen</a>
+        <a href="#resumen">Métricas</a>
+        <a href="#roles">Roles XP</a>
+        <a href="#fases">Fases XP</a>
+        <a href="#historias">HU y criterios</a>
+        <a href="#iteraciones">Línea de tiempo</a>
+        <a href="#pruebas">Pruebas TestRail</a>
+        <a href="#bugs">Bugs Jira</a>
+        <a href="#trazabilidad">Trazabilidad</a>
+        <a href="#cambios">Cambios / commits</a>
+        <a href="#diagramas">Diagramas</a>
+        <a href="#integraciones">Integraciones</a>
+      </nav>
+
+      <div class="card side-status">
+        <div class="muted">Estado del proyecto</div>
+        <div id="sidebarProgress" class="side-progress-value">0%</div>
+        <div class="progress"><div id="sidebarProgressBar" class="bar"></div></div>
+        <small id="sidebarProgressText" class="muted">0 / 0 puntos finalizados</small>
+      </div>
+
+      <div class="card small-card">
+        <h4>Accesos rápidos</h4>
+        <div class="quick-links">
+          <a class="btn small" href="roles/index.html">Carpetas por rol</a>
+          <a class="btn small" href="artefactos/index.html">Carpetas por fase</a>
+          <a class="btn small" href="diagramas/casos_uso.html">Caso de uso</a>
+          <a class="btn small" href="integraciones/guia_jira_testrail.html">Enlaces Jira/TestRail</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="inicio" class="hero">
+        <span class="tag">Dashboard</span>
+        <h2>Space Invaders XP</h2>
+        <p>Historias, iteraciones, pruebas, bugs, trazabilidad y entregables.</p>
+        <div class="hero-actions">
+          <button class="btn primary" onclick="saveSnapshot()">💾 Guardar cambios</button>
+          <button class="btn" onclick="openHUForm()">＋ Nueva HU local</button>
+          <button class="btn" onclick="openBugForm()">＋ Crear bug local</button>
+          <a class="btn" href="#iteraciones">Línea de tiempo</a>
+          <a class="btn" href="#trazabilidad">Trazabilidad</a>
+          <button class="btn" onclick="resetDemo()">↺ Restaurar datos base</button>
+          <a id="jiraHeroLink" class="btn" target="_blank" rel="noopener">Abrir Jira</a>
+          <a id="testrailHeroLink" class="btn" target="_blank" rel="noopener">Abrir TestRail</a>
+        </div>
+      </section>
+
+      <section id="resumen" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Resumen del proyecto</h3>
+            <p class="lead">Métricas principales, avance por iteración, calidad de pruebas y progreso del equipo.</p>
+          </div>
+        </div>
+        <div id="kpiGrid" class="grid cols-4"></div>
+        <div class="grid cols-2 summary-top">
+          <div class="card" id="iterationSummaryCard"></div>
+          <div class="card" id="qualitySummaryCard"></div>
+        </div>
+        <div class="grid cols-2 summary-top">
+          <div class="card" id="jiraStatusSummary"></div>
+          <div class="card" id="jiraTestRailSummary"></div>
+        </div>
+        <div class="card" id="peopleProgressCard"></div>
+      </section>
+
+      <section id="roles" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Roles XP del equipo</h3>
+            <p class="lead">Cada rol muestra responsabilidades, entregables y secciones relacionadas dentro de XP.</p>
+          </div>
+          <div class="filters">
+            <a class="btn small" href="roles/index.html">Carpetas por rol</a>
+            <a class="btn small" href="artefactos/index.html">Carpetas por fase</a>
+          </div>
+        </div>
+        <div id="rolesGrid" class="grid cols-3"></div>
+        <div id="roleDetail" class="card detail-panel"></div>
+      </section>
+
+      <section id="fases" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Fases XP y artefactos</h3>
+            <p class="lead">Planeación, diseño, codificación y pruebas con entregables claros.</p>
+          </div>
+        </div>
+        <div id="xpValues" class="grid cols-3"></div>
+        <div id="phasesGrid" class="grid cols-2 section-gap-top"></div>
+        <div id="phaseDetail" class="card detail-panel"></div>
+      </section>
+
+      <section id="historias" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Historias de usuario, criterios y Gherkin</h3>
+            <p class="lead">Se puede cambiar estado, prioridad, puntos y horas. También se visualiza el tablero local.</p>
+          </div>
+          <div class="filters">
+            <input id="huSearch" class="input" placeholder="Buscar HU, responsable o título">
+            <select id="huFilterIteration"><option value="all">Todas las iteraciones</option></select>
+            <select id="huFilterStatus"><option value="all">Todos los estados</option></select>
+          </div>
+        </div>
+        <div class="grid hu-layout">
+          <div class="card table-card">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>HU</th>
+                    <th>Historia</th>
+                    <th>Dueño</th>
+                    <th>Prio</th>
+                    <th>Pts</th>
+                    <th>Horas</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="huTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card board-card">
+            <h4>Tablero local</h4>
+            <div id="huBoard" class="kanban-mini"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="iteraciones" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Línea de tiempo e iteraciones</h3>
+            <p class="lead">Plan de entregas y progreso estimado por sprint/iteración.</p>
+          </div>
+        </div>
+        <div class="grid iterations-layout">
+          <div id="timelineWrap" class="card"></div>
+          <div id="deliveryPlan" class="card"></div>
+        </div>
+      </section>
+
+      <section id="pruebas" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Pruebas TestRail</h3>
+            <p class="lead">Los resultados son editables y actualizan el resumen de calidad. Si una prueba falla, puede generarse un bug.</p>
+          </div>
+          <div class="filters">
+            <input id="testSearch" class="input" placeholder="Buscar caso o referencia">
+          </div>
+        </div>
+        <div class="card tests-top-card" id="testRunSummary"></div>
+        <div class="card table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Caso</th>
+                  <th>Referencia</th>
+                  <th>Prioridad</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="testsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="bugs" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Bugs vinculados a Jira</h3>
+            <p class="lead">Defectos del proyecto. Se pueden crear bugs locales y actualizar su estado.</p>
+          </div>
+          <div class="filters">
+            <button class="btn small" onclick="openBugForm()">＋ Crear bug local</button>
+          </div>
+        </div>
+        <div class="card table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Bug</th>
+                  <th>Título</th>
+                  <th>HU</th>
+                  <th>Prueba</th>
+                  <th>Severidad</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="bugsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="trazabilidad" class="section">
+        <div class="section-title">
+          <div>
+            <h2>Trazabilidad del proyecto</h2>
+            <p>Relación entre épicas, historias de usuario, criterios de aceptación, pruebas TestRail, bugs Jira y archivos del juego.</p>
+          </div>
+          <a class="btn" href="artefactos/trazabilidad.csv" target="_blank">Abrir matriz CSV</a>
+        </div>
+        <div class="card table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Épica</th>
+                  <th>Historia de usuario</th>
+                  <th>Estado</th>
+                  <th>Criterios</th>
+                  <th>Pruebas TestRail</th>
+                  <th>Bugs Jira</th>
+                  <th>Archivos del juego</th>
+                </tr>
+              </thead>
+              <tbody id="traceBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="cambios" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Simulador de cambios / commits</h3>
+            <p class="lead">Permite explicar cómo XP responde a cambios en el desarrollo del juego.</p>
+          </div>
+        </div>
+        <div class="grid cols-2">
+          <div class="card">
+            <form id="changeForm">
+              <div class="grid cols-2">
+                <div>
+                  <label>Responsable</label>
+                  <select id="changeWho"></select>
+                </div>
+                <div>
+                  <label>HU</label>
+                  <select id="changeHU"></select>
+                </div>
+                <div>
+                  <label>Archivo</label>
+                  <input id="changeFile" class="input" placeholder="src/Presentacion/PanelDeJuego.java" required>
+                </div>
+                <div>
+                  <label>Tipo</label>
+                  <select id="changeType">
+                    <option>Código</option>
+                    <option>Prueba</option>
+                    <option>Diseño</option>
+                    <option>Documentación</option>
+                    <option>Bug</option>
+                    <option>Refactorización</option>
+                  </select>
+                </div>
+              </div>
+              <div class="section-gap-top">
+                <label>Nota</label>
+                <textarea id="changeNote" rows="4" class="input" placeholder="Qué se cambió y por qué" required></textarea>
+              </div>
+              <div class="section-gap-top">
+                <button class="btn primary" type="submit">Registrar cambio</button>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <h4>Actividad reciente</h4>
+            <div id="changesFeed" class="timeline mini-timeline"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagramas" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Diagramas del proyecto</h3>
+            <p class="lead">Caso de uso limpio y diagramas de clases y secuencia relacionados.</p>
+          </div>
+        </div>
+        <div class="grid cols-3">
+          <a class="card" href="diagramas/casos_uso.html"><h4>Casos de uso</h4><p>Diagrama simplificado, claro y sin exceso de líneas.</p></a>
+          <a class="card" href="diagramas/diagrama_clases_resumido.html"><h4>Diagrama de clases</h4><p>Resumen de clases principales del juego.</p></a>
+          <a class="card" href="diagramas/secuencia_disparo.html"><h4>Secuencia de disparo</h4><p>Interacción entre jugador, proyectil y enemigos.</p></a>
+        </div>
+      </section>
+
+      <section id="integraciones" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Integraciones y enlaces</h3>
+            <p class="lead">Enlaces guardados localmente para abrir Jira y TestRail.</p>
+          </div>
+        </div>
+        <div class="grid cols-2">
+          <div class="card">
+            <h4>Enlaces configurables</h4>
+            <label>Jira</label>
+            <input id="jiraBase" class="input" placeholder="https://...">
+            <div class="section-gap-top"></div>
+            <label>TestRail</label>
+            <input id="testrailBase" class="input" placeholder="https://...">
+            <div class="section-gap-top"></div>
+            <button class="btn primary" onclick="saveLinks()">Guardar enlaces</button>
+          </div>
+          <div class="card">
+            <h4>Recursos</h4>
+            <div class="quick-links two-col">
+              <a class="btn small" href="integraciones/jira_historias.csv" target="_blank">CSV Jira</a>
+              <a class="btn small" href="integraciones/testrail_casos.csv" target="_blank">CSV TestRail</a>
+              <a class="btn small" href="integraciones/matriz_trazabilidad.csv" target="_blank">Matriz trazabilidad</a>
+              <a class="btn small" href="integraciones/guia_jira_testrail.html" target="_blank">Enlaces Jira/TestRail</a>
+            </div>
+            <p class="muted section-gap-top">Los cambios del dashboard son locales y se conservan en el navegador con localStorage.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">Proyecto académico · Space Invaders XP</div>
+    </main>
+  </div>
+
+  <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Volver arriba</button>
+
+  <div id="modalBack" class="modal-back">
+    <div class="modal">
+      <div class="modal-head">
+        <div id="modalTitleWrap"></div>
+        <button class="close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

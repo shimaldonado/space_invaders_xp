@@ -1,0 +1,181 @@
+Issue Type,Summary,Description,Priority,Story Points,Assignee,Labels,Epic Link
+Story,HU-01 - Iniciar partida desde el menú principal,"Como jugador quiero iniciar una partida desde el menú principal para comenzar a jugar de forma clara y rápida.
+
+Valor: Permite demostrar el flujo base del juego y que el usuario puede entrar al escenario principal.
+
+Criterios de aceptación:
+CA-01: El menú muestra opciones de iniciar juego, cargar partida, puntuaciones y salir.
+CA-02: Al presionar Iniciar Juego se abre el escenario principal sin errores.
+CA-03: El juego inicia con puntaje cero, vidas iniciales y enemigos visibles.
+
+Gherkin:
+Dado que el jugador está en el menú principal
+Cuando selecciona la opción Iniciar Juego
+Entonces el sistema abre el panel de juego con nave, enemigos, vidas y puntaje inicial.
+
+Responsables: PO Nahomy, Dev David, Tester Diego",Alta,3,David,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-02 - Mover nave del jugador con teclado,"Como jugador quiero mover mi nave hacia la izquierda y derecha para esquivar ataques y posicionarme para disparar.
+
+Valor: Es la mecánica principal del juego y permite interacción directa del usuario.
+
+Criterios de aceptación:
+CA-01: La nave se mueve a la izquierda al presionar la tecla correspondiente.
+CA-02: La nave se mueve a la derecha al presionar la tecla correspondiente.
+CA-03: La nave no sale de los límites visibles del panel.
+
+Gherkin:
+Dado que la partida está activa
+Cuando el jugador presiona izquierda o derecha
+Entonces la nave cambia su posición sin salir del área de juego.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Alta,5,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-03 - Disparar proyectiles del jugador,"Como jugador quiero disparar proyectiles para eliminar enemigos y ganar puntos.
+
+Valor: Permite cumplir el objetivo central del Space Invaders: atacar enemigos.
+
+Criterios de aceptación:
+CA-01: Al presionar la tecla de disparo se genera un proyectil desde la nave.
+CA-02: El proyectil avanza hacia arriba y desaparece al salir del mapa.
+CA-03: El sistema respeta la velocidad/cooldown de disparo para evitar disparos infinitos.
+
+Gherkin:
+Dado que la partida está activa
+Cuando el jugador presiona la tecla de disparo
+Entonces se crea un proyectil visible que avanza desde la nave hacia los enemigos.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Alta,5,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-04 - Generar oleadas de enemigos,"Como jugador quiero enfrentar oleadas de enemigos para que el juego tenga dificultad progresiva.
+
+Valor: Aumenta el reto y permite mostrar diseño de clases con Enjambre y NaveEnemigo.
+
+Criterios de aceptación:
+CA-01: El sistema genera varios tipos de enemigos al iniciar la partida.
+CA-02: Los enemigos se desplazan como enjambre y cambian de dirección según el límite.
+CA-03: Al terminar una oleada se puede incrementar la dificultad.
+
+Gherkin:
+Dado que una partida inicia
+Cuando el sistema carga el escenario
+Entonces se muestran enemigos organizados en oleadas con movimiento controlado.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Alta,8,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-05 - Detectar colisiones y actualizar puntaje/vidas,"Como jugador quiero que el juego detecte impactos para eliminar enemigos, perder vidas o finalizar la partida correctamente.
+
+Valor: Es la regla de negocio principal del juego y conecta gameplay con métricas de victoria/derrota.
+
+Criterios de aceptación:
+CA-01: Si un proyectil del jugador impacta a un enemigo, el enemigo desaparece y aumenta el puntaje.
+CA-02: Si un proyectil enemigo impacta al jugador, se reduce una vida.
+CA-03: Si el jugador pierde todas las vidas, se muestra fin de juego.
+
+Gherkin:
+Dado que existen proyectiles y enemigos en pantalla
+Cuando ocurre una colisión válida
+Entonces el sistema actualiza entidad, puntaje o vidas según corresponda.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Alta,8,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-06 - Usar barreras defensivas,"Como jugador quiero tener barreras defensivas para protegerme temporalmente de los disparos enemigos.
+
+Valor: Aporta estrategia y evidencia herencia con Entidad.
+
+Criterios de aceptación:
+CA-01: Las barreras aparecen al iniciar el juego.
+CA-02: Los proyectiles pueden impactar contra la barrera.
+CA-03: La barrera reduce daño o desaparece según la regla definida.
+
+Gherkin:
+Dado que la partida está activa
+Cuando un proyectil impacta una barrera
+Entonces el sistema aplica la regla de daño y evita que el proyectil continúe.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Media,3,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-07 - Pausar y reanudar la partida,"Como jugador quiero pausar y reanudar la partida para detener temporalmente el juego sin perder el progreso.
+
+Valor: Mejora la experiencia de usuario y permite mostrar control del estado del juego.
+
+Criterios de aceptación:
+CA-01: Al activar pausa, el temporizador del juego se detiene.
+CA-02: La ventana de pausa permite reanudar o salir.
+CA-03: Al reanudar, el juego continúa desde el mismo estado.
+
+Gherkin:
+Dado que una partida está en ejecución
+Cuando el jugador activa la pausa
+Entonces el sistema detiene el movimiento y muestra opciones de pausa.
+
+Responsables: PO Nahomy, Dev David, Tester Diego",Media,3,David,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-08 - Guardar y cargar partida,"Como jugador quiero guardar y cargar una partida para continuar después sin reiniciar desde cero.
+
+Valor: Evidencia persistencia, manejo de excepciones y flujo de recuperación.
+
+Criterios de aceptación:
+CA-01: El sistema guarda el estado relevante de la partida.
+CA-02: El sistema permite cargar una partida existente.
+CA-03: Si no existe una partida guardada, se muestra un mensaje controlado.
+
+Gherkin:
+Dado que existe una partida guardada
+Cuando el jugador selecciona cargar partida
+Entonces el sistema restaura el estado de juego sin cerrar la aplicación.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Media,8,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-09 - Mostrar puntuaciones/ranking,"Como jugador quiero ver las mejores puntuaciones para comparar mi resultado con partidas anteriores.
+
+Valor: Agrega motivación y evidencia manejo de datos del juego.
+
+Criterios de aceptación:
+CA-01: El menú permite abrir la ventana de puntuaciones.
+CA-02: El ranking muestra nombre y puntaje de jugadores.
+CA-03: Las puntuaciones se ordenan de mayor a menor.
+
+Gherkin:
+Dado que el jugador está en el menú
+Cuando selecciona Puntuaciones
+Entonces el sistema muestra el ranking ordenado de mejores puntajes.
+
+Responsables: PO Nahomy, Dev David, Tester Diego",Media,5,David,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-10 - Reproducir música y efectos de sonido,"Como jugador quiero escuchar música y efectos para tener una experiencia más inmersiva.
+
+Valor: Mejora visual y atractivo del juego.
+
+Criterios de aceptación:
+CA-01: El menú reproduce música de ambiente.
+CA-02: El disparo y las explosiones reproducen efectos.
+CA-03: El sonido no bloquea la ejecución del juego.
+
+Gherkin:
+Dado que el juego ejecuta una acción sonora
+Cuando ocurre disparo, explosión o fin de juego
+Entonces el sistema reproduce el efecto correspondiente sin detener la partida.
+
+Responsables: PO Nahomy, Dev David, Tester Diego",Baja,3,David,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-11 - Aplicar modificadores/power-ups,"Como jugador quiero recibir modificadores durante la partida para obtener ventajas temporales o vidas extra.
+
+Valor: Hace el juego más llamativo y muestra polimorfismo con Modificador.
+
+Criterios de aceptación:
+CA-01: Los enemigos pueden generar modificadores bajo una regla definida.
+CA-02: Al tomar un modificador, se aplica su efecto a la nave.
+CA-03: Los efectos respetan duración o condición definida.
+
+Gherkin:
+Dado que un modificador aparece en pantalla
+Cuando la nave del jugador lo recoge
+Entonces el sistema aplica el efecto correspondiente a la nave.
+
+Responsables: PO Nahomy, Dev Kevin, Tester Diego",Media,5,Kevin,"XP,SpaceInvaders,Juego",Space Invaders XP
+Story,HU-12 - Mostrar fin de juego y opción de reinicio,"Como jugador quiero ver una pantalla de fin de juego para conocer mi resultado y decidir si vuelvo a jugar.
+
+Valor: Cierra correctamente el flujo del juego y permite evidenciar una entrega completa.
+
+Criterios de aceptación:
+CA-01: El sistema detecta condición de derrota o fin de partida.
+CA-02: La ventana de fin de juego muestra puntaje final.
+CA-03: El jugador puede regresar al menú o reiniciar según la opción disponible.
+
+Gherkin:
+Dado que el jugador pierde todas sus vidas
+Cuando se cumple la condición de fin de juego
+Entonces el sistema muestra la ventana final con puntaje y opciones de salida.
+
+Responsables: PO Nahomy, Dev David, Tester Diego",Alta,5,David,"XP,SpaceInvaders,Juego",Space Invaders XP
